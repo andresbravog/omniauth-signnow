@@ -10,4 +10,5 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'growl'
   gem 'coveralls', require: false
+  gem 'rack'
 end
