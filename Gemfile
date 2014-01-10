@@ -10,5 +10,9 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'growl'
   gem 'coveralls', require: false
-  gem 'rack'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'rake'
+  gem 'webmock'
+  gem 'simplecov'
 end

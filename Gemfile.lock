@@ -67,6 +67,7 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (0.9.6)
     rb-fsevent (0.9.3)
     rb-inotify (0.9.0)
       ffi (>= 0.5.0)
@@ -105,9 +106,9 @@ DEPENDENCIES
   guard-bundler
   guard-rspec
   omniauth-signnow!
-  rack
   rack-test
+  rake
   rb-fsevent
-  rspec (~> 2.7)
+  rspec
   simplecov
   webmock
