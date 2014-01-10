@@ -1,6 +1,6 @@
 # OmniAuth Signow.com
 
-[![Build Status](https://travis-ci.org/andresbravog/omniauth-signnow.png)](https://travis-ci.org/andresbravog/omniauth-signnow)
+[![Build Status](https://travis-ci.org/andresbravog/omniauth-signnow.png)](https://travis-ci.org/andresbravog/omniauth-signnow) [![Coverage Status](https://coveralls.io/repos/andresbravog/omniauth-signnow/badge.png?branch=master)](https://coveralls.io/r/andresbravog/omniauth-signnow?branch=master)
 
 An unofficial OmniAuth strategy for authenticating to Signnow.com using OAuth2. To use it, you'll
 need to have a Signow.com [developer account](https://www.signow.com/developer).

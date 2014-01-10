@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe OmniAuth::Strategies::Signnow do
-  def app; lambda{|env| [200, {}, ["Hello."]]} end
-
+  let(:app) do
+    lambda do |env|
+      [200, {}, ["Hello."]]
+    end
+  end
+  let(:request) { double('Request', :params => {}, :cookies => {}, :env => {}) }
   let(:fresh_strategy){ Class.new(OmniAuth::Strategies::Signnow) }
 
   before do
@@ -31,19 +35,19 @@ describe OmniAuth::Strategies::Signnow do
     subject { fresh_strategy }
 
     it 'should include :client_id option' do
-      instance = subject.new('abc', 'def')
+      instance = subject.new(app, '_your_app_id_', '_your_app_secret_')
       expect(instance.authorize_params).to include('client_id')
-      expect(instance.authorize_params['client_id']).to eql('def')
+      expect(instance.authorize_params['client_id']).to eql('_your_app_id_')
     end
 
     it 'should include :response_type option' do
-      instance = subject.new('abc', 'def')
+      instance = subject.new(app, '_your_app_id_', '_your_app_secret_')
       expect(instance.authorize_params).to include('response_type')
       expect(instance.authorize_params['response_type']).to eql('code')
     end
 
     it 'should include random state in the authorize params' do
-      instance = subject.new('abc', 'def')
+      instance = subject.new(app, '_your_app_id_', '_your_app_secret_')
       expect(instance.authorize_params).to include('state')
       instance.session['omniauth.state'].should_not be_empty
     end
