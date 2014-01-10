@@ -5,10 +5,7 @@ gemspec
 
 gem 'rake'
 gem 'coveralls', require: false
-gem 'rack-test'
 gem 'rspec'
-gem 'webmock'
-gem 'simplecov'
 
 group :development, :test do
   gem 'guard'
