@@ -1,5 +1,7 @@
 # OmniAuth Signow.com
 
+[![Build Status](https://travis-ci.org/andresbravog/omniauth-signnow.png)](https://travis-ci.org/andresbravog/omniauth-signnow)
+
 An unofficial OmniAuth strategy for authenticating to Signnow.com using OAuth. To use it, you'll
 need to have a Signow.com [developer account](https://www.signow.com/developer).
 
