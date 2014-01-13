@@ -6,15 +6,15 @@ module OmniAuth
       # Give your strategy a name.
       option :name, "signnow"
 
+      option :provider_ignores_state, true
+
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
       option :client_options, {
-        site: 'https://api.signnow.com',
-        authorize_url: 'https://signnow.com/proxy/index.php/authorize',
-        token_url: 'https://api.signnow.com/oauth2/token'
+        site: 'https://api.signnow.com/api',
+        authorize_url: 'https://www.signnow.com/proxy/index.php/authorize',
+        token_url: 'https://api.signnow.com/api/oauth2/token'
       }
-
-      option :authorize_options, [:client_id]
 
       option :authorize_params, {
         response_type: 'code'
@@ -29,8 +29,8 @@ module OmniAuth
 
       info do
         {
-          :name => raw_info['name'],
-          :email => raw_info['email']
+          :name => [ raw_info['first_name'], raw_info['last_name'] ].join(' '),
+          :email => (raw_info['emails'] || []).first
         }
       end
 
@@ -41,7 +41,23 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/me').parsed
+        @raw_info ||= access_token.get('https://api.signnow.com/api/user').parsed
+      end
+
+      def build_access_token
+        verifier = request.params['code']
+        new_params = { :redirect_uri => callback_url }.merge(auth_options)
+        params = new_params.merge(token_params.to_hash(:symbolize_keys => true))
+        opts = deep_symbolize(options.auth_token_params || {})
+        client.auth_code.get_token(verifier, params, opts)
+      end
+
+      def auth_options
+        {
+          :headers => {
+            'Authorization' => "Basic #{Base64.encode64(client.id+':'+client.secret).gsub(/[\n=]/,'')}"
+          }
+        }
       end
     end
   end

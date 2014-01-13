@@ -30,11 +30,11 @@ describe OmniAuth::Strategies::Signnow do
   describe '#client_options' do
 
     it 'should be initialized with correct authorize url' do
-      expect(subject.client.options[:authorize_url]).to eql 'https://signnow.com/proxy/index.php/authorize'
+      expect(subject.client.options[:authorize_url]).to eql 'https://eval.signnow.com/proxy/index.php/authorize'
     end
 
     it 'should be initialized with correct token url' do
-      expect(subject.client.options[:token_url]).to eql 'https://api.signnow.com/oauth2/token'
+      expect(subject.client.options[:token_url]).to eql 'https://capi-eval.signnow.com/api/oauth2/token'
     end
 
     describe "overrides" do
@@ -63,11 +63,6 @@ describe OmniAuth::Strategies::Signnow do
       subject.authorize_params['foo'].should eq('bar')
       subject.authorize_params['baz'].should eq('zip')
       subject.authorize_params['bad'].should eq(nil)
-    end
-
-    it 'should include :client_id option' do
-      expect(subject.authorize_params).to include('client_id')
-      expect(subject.authorize_params['client_id']).to eql('_your_app_id_')
     end
 
     it 'should include :response_type option' do
@@ -101,6 +96,22 @@ describe OmniAuth::Strategies::Signnow do
   describe '#callback_path' do
     it 'has the correct callback path' do
       subject.callback_path.should eq('/auth/signnow/callback')
+    end
+  end
+
+  describe '#auth_options' do
+    let(:base64_client_key) {
+      Base64.encode64(subject.client.id + ':' + subject.client.secret).gsub(/[\n=]/,'')
+    }
+    it  'is protected' do
+      expect(subject.auth_options).to raise_error(NoMethodError)
+    end
+    it 'returns a hash with the Autorization header' do
+      expect(subject.send(:auth_options).class).to eql(Hash)
+      expect(subject.send(:auth_options)).to include(:headers)
+      expect(subject.send(:auth_options)[:headers]).to include('Authorization')
+      expect(subject.send(:auth_options)[:headers]['Authorization']).to match(/Basic/)
+      expect(subject.send(:auth_options)[:headers]['Authorization']).to match(/#{base64_client_key}/)
     end
   end
 
