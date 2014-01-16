@@ -53,11 +53,12 @@ module OmniAuth
       end
 
       def auth_options
-        {
-          :headers => {
-            'Authorization' => "Basic #{Base64.encode64(client.id+':'+client.secret).gsub(/[\n=]/,'')}"
-          }
-        }
+        { headers: { Authorization: "Basic #{encoded_credentials}" } }
+      end
+
+      def encoded_credentials
+        return unless client and client.id and client.secret
+        Base64.strict_encode64( client.id + ':' + client.secret)
       end
     end
   end

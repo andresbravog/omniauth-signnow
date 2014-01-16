@@ -21,7 +21,7 @@ Here's an example for adding the middleware to a Rails app in `config/initialize
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :signnow, ENV['SIGNNOW_APP_KEY'], ENV['SIGNNOW_APP_SECRET']
+  provider :signnow, ENV['SIGNNOW_APP_ID'], ENV['SIGNNOW_APP_SECRET']
 end
 ```
 
