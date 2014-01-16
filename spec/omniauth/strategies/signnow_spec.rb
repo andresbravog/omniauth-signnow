@@ -101,7 +101,7 @@ describe OmniAuth::Strategies::Signnow do
 
   describe '#auth_options' do
     let(:base64_client_key) {
-      Base64.encode64(subject.client.id + ':' + subject.client.secret).gsub(/[\n=]/,'')
+      Base64.strict_encode64(subject.client.id + ':' + subject.client.secret)
     }
     it  'is protected' do
       expect(subject.auth_options).to raise_error(NoMethodError)
@@ -109,9 +109,9 @@ describe OmniAuth::Strategies::Signnow do
     it 'returns a hash with the Autorization header' do
       expect(subject.send(:auth_options).class).to eql(Hash)
       expect(subject.send(:auth_options)).to include(:headers)
-      expect(subject.send(:auth_options)[:headers]).to include('Authorization')
-      expect(subject.send(:auth_options)[:headers]['Authorization']).to match(/Basic/)
-      expect(subject.send(:auth_options)[:headers]['Authorization']).to match(/#{base64_client_key}/)
+      expect(subject.send(:auth_options)[:headers]).to include :Authorization
+      expect(subject.send(:auth_options)[:headers][:Authorization]).to match(/Basic/)
+      expect(subject.send(:auth_options)[:headers][:Authorization]).to match(/#{base64_client_key}/)
     end
   end
 
