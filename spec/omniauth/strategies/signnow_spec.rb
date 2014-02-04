@@ -30,7 +30,7 @@ describe OmniAuth::Strategies::Signnow do
   describe '#client_options' do
 
     it 'should be initialized with correct authorize url' do
-      expect(subject.client.options[:authorize_url]).to eql 'https://www.signnow.com/proxy/index.php/authorize'
+      expect(subject.client.options[:authorize_url]).to eql 'https://signnow.com/proxy/index.php/authorize'
     end
 
     it 'should be initialized with correct token url' do

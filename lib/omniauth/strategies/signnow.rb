@@ -12,7 +12,7 @@ module OmniAuth
       # initializing your consumer from the OAuth gem.
       option :client_options, {
         site: 'https://api.signnow.com/api',
-        authorize_url: 'https://www.signnow.com/proxy/index.php/authorize',
+        authorize_url: 'https://signnow.com/proxy/index.php/authorize',
         token_url: 'https://api.signnow.com/api/oauth2/token'
       }
 
