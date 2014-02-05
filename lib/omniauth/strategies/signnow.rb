@@ -11,7 +11,7 @@ module OmniAuth
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
       option :client_options, {
-        site: 'https://api.signnow.com/api',
+        site: 'https://api.signnow.com',
         authorize_url: 'https://signnow.com/proxy/index.php/authorize',
         token_url: 'https://api.signnow.com/oauth2/token'
       }
@@ -41,7 +41,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('https://api.signnow.com/api/user').parsed
+        @raw_info ||= access_token.get('https://api.signnow.com/user').parsed
       end
 
       def build_access_token
