@@ -13,7 +13,7 @@ module OmniAuth
       option :client_options, {
         site: 'https://api.signnow.com/api',
         authorize_url: 'https://signnow.com/proxy/index.php/authorize',
-        token_url: 'https://api.signnow.com/api/oauth2/token'
+        token_url: 'https://api.signnow.com/oauth2/token'
       }
 
       option :authorize_params, {

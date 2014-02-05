@@ -34,7 +34,7 @@ describe OmniAuth::Strategies::Signnow do
     end
 
     it 'should be initialized with correct token url' do
-      expect(subject.client.options[:token_url]).to eql 'https://api.signnow.com/api/oauth2/token'
+      expect(subject.client.options[:token_url]).to eql 'https://api.signnow.com/oauth2/token'
     end
 
     describe "overrides" do
