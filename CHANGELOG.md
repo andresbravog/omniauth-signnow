@@ -13,7 +13,7 @@
 - New rubies to the travis.yml.
 
 ### Changed
-- Relaxed `omniauth-oauth` dependency to so that it fits `1.x`.
+- Relaxed `omniauth-oauth` dependency so that it fits `1.x`.
 
 ### Removed
 - Gemfile.lock since it is supossed to be out of version control.
