@@ -11,8 +11,10 @@
 ## [0.6.0] - 2015-11-18
 ### Added
 - New rubies to the travis.yml.
+
 ### Changed
 - Relaxed `omniauth-oauth` dependency to so that it fits `1.x`.
+
 ### Removed
 - Gemfile.lock since it is supossed to be out of version control.
 
